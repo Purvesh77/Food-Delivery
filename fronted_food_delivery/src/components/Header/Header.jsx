@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { assets } from '../../assets/assets';
 import styled from 'styled-components';
 
@@ -45,7 +45,7 @@ const HeaderDescription = styled.p`
   }
 `;
 
-const HeaderButton = styled.button`
+const HeaderButton = styled.a`
   border: none;
   color: #747474;
   font-weight: 500;
@@ -53,13 +53,22 @@ const HeaderButton = styled.button`
   background-color: white;
   font-size: max(1vw, 13px);
   border-radius: 50px;
+  text-align: center;
+  text-decoration: none;
 
   @media (max-width: 750px) {
     padding: 2vw 4vw;
   }
+
+  &.active {
+    background-color: #f0a500;
+    color: white;
+  }
 `;
 
 const Header = () => {
+  const [menu, setMenu] = useState(""); // State to track the active menu
+
   return (
     <HeaderContainer>
       <HeaderContents>
@@ -67,7 +76,13 @@ const Header = () => {
         <HeaderDescription>
           Choose from a diverse menu featuring a delectable array of dishes crafted with the finest ingredients and culinary expertise. Our mission is to satisfy your cravings and elevate your dining experience, one delicious meal at a time.
         </HeaderDescription>
-        <HeaderButton>View Menu</HeaderButton>
+        <HeaderButton
+          href="#explore-menu" // This will scroll to the section with the id 'explore-menu'
+          onClick={() => setMenu("Menu")}
+          className={menu === "Menu" ? "active" : ""}
+        >
+          View Menu
+        </HeaderButton>
       </HeaderContents>
     </HeaderContainer>
   );
